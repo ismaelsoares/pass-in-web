@@ -12,6 +12,7 @@ export function App() {
     <>
       <h1>Hello World</h1>
       <MeuBotao text="Clique aqui" />
+      <p>Só lamento pra voce que queria esse domínio do Vercel kkkkkk</p>
       <MeuBotao text="Botão 2" />
       <MeuBotao />
     </>
