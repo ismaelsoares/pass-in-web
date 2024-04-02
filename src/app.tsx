@@ -16,6 +16,7 @@ export function App() {
       <MeuBotao text="Botão 2" />
       <MeuBotao />
       <MeuBotao text="so nada!" />
+      <MeuBotao text="so nada2!" />
     </>
   )
 }
