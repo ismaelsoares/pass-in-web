@@ -1,5 +1,4 @@
 import nlwUniteIcon from "../assets/nlw-unite-icon.svg";
-import { IconButton } from "./icon-button";
 import { NavLink } from "./nav-link";
 
 export const Header = () => {
