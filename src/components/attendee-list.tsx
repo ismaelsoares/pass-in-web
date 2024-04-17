@@ -9,8 +9,15 @@ import {
 import { IconButton } from "./icon-button";
 import { TableHeader } from "./table/table-header";
 import { Table } from "./table/table";
+import { TableCell } from "./table/table-cell";
+import { TableRow } from "./table/table-row";
+import { ChangeEvent, useState } from "react";
 
 export const AttendeeList = () => {
+  const [search, setSearch] = useState("");
+  const onSearchInputChanged = (event: ChangeEvent<HTMLInputElement>) =>
+    setSearch(event.target.value);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
@@ -21,8 +28,11 @@ export const AttendeeList = () => {
             className="flex-1 p-0 text-sm bg-transparent border-0 outline-none"
             type="text"
             placeholder="Buscar participante..."
+            onChange={onSearchInputChanged}
           />
         </div>
+
+        {search}
       </div>
 
       <Table>
@@ -46,47 +56,41 @@ export const AttendeeList = () => {
         <tbody>
           {Array.from({ length: 8 }).map((_, i) => {
             return (
-              <tr key={i} className="border-b border-white/10 hover:bg-white/5">
-                <td className="px-4 py-3 text-sm text-zinc-300">
+              <TableRow
+                key={i}
+                className="border-b border-white/10 hover:bg-white/5"
+              >
+                <TableCell>
                   <input
                     type="checkbox"
                     className="border-white/10 size-4 bg-black/20"
                   />
-                </td>
-                <td className="px-4 py-3 text-sm text-zinc-300">123285</td>
-                <td className="px-4 py-3 text-sm text-zinc-300">
+                </TableCell>
+                <TableCell>123285</TableCell>
+                <TableCell>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-white">
                       Ismael Soares Doria
                     </span>
                     <span>ismaelsoaresdoria@gmail.com</span>
                   </div>
-                </td>
-                <td className="px-4 py-3 text-sm text-zinc-300">
-                  7 dias atrás
-                </td>
-                <td className="px-4 py-3 text-sm text-zinc-300">
-                  3 dias atrás
-                </td>
-                <td className="px-4 py-3 text-sm text-zinc-300">
+                </TableCell>
+                <TableCell>7 dias atrás</TableCell>
+                <TableCell>3 dias atrás</TableCell>
+                <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4" />
                   </IconButton>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             );
           })}
         </tbody>
 
         <tfoot>
           <tr>
-            <td className="px-4 py-3 text-sm text-zinc-300" colSpan={3}>
-              Mostrando 10 de 228 itens
-            </td>
-            <td
-              className="px-4 py-3 text-sm text-right text-zinc-300"
-              colSpan={3}
-            >
+            <TableCell colSpan={3}>Mostrando 10 de 228 itens</TableCell>
+            <TableCell className="text-right" colSpan={3}>
               <div className="inline-flex items-center gap-8">
                 <span>Página 1 de 23</span>
                 <div className="flex gap-1.5">
@@ -104,7 +108,7 @@ export const AttendeeList = () => {
                   </IconButton>
                 </div>
               </div>
-            </td>
+            </TableCell>
           </tr>
         </tfoot>
       </Table>
