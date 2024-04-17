@@ -21,9 +21,19 @@ dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 export const AttendeeList = () => {
   const [search, setSearch] = useState("");
-  const [page] = useState(1);
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.ceil(attendees.length / 10);
   const onSearchInputChanged = (event: ChangeEvent<HTMLInputElement>) =>
     setSearch(event.target.value);
+
+  const goToFirstPage = () => setPage(1);
+
+  const goToNextPage = () => setPage(page + 1);
+
+  const goToPreviousPage = () => setPage(page - 1);
+
+  const goToLastPage = () => setPage(totalPages);
 
   return (
     <div className="flex flex-col gap-4">
@@ -102,19 +112,25 @@ export const AttendeeList = () => {
             <TableCell className="text-right" colSpan={3}>
               <div className="inline-flex items-center gap-8">
                 <span>
-                  Página {page} de {Math.ceil(attendees.length / 10)}
+                  Página {page} de {totalPages}
                 </span>
                 <div className="flex gap-1.5">
-                  <IconButton>
+                  <IconButton onClick={goToFirstPage} disabled={page === 1}>
                     <ChevronsLeft className="size-4" />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={goToPreviousPage} disabled={page === 1}>
                     <ChevronLeft className="size-4" />
                   </IconButton>
-                  <IconButton>
+                  <IconButton
+                    onClick={goToNextPage}
+                    disabled={page === totalPages}
+                  >
                     <ChevronRight className="size-4" />
                   </IconButton>
-                  <IconButton>
+                  <IconButton
+                    onClick={goToLastPage}
+                    disabled={page === totalPages}
+                  >
                     <ChevronsRight className="size-4" />
                   </IconButton>
                 </div>
