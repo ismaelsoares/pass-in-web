@@ -21,7 +21,7 @@ dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 export const AttendeeList = () => {
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const onSearchInputChanged = (event: ChangeEvent<HTMLInputElement>) =>
     setSearch(event.target.value);
 
